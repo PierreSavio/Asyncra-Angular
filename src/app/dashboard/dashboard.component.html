@@ -1,0 +1,12 @@
+<div class="page" [ngClass]="{'dashboard-slide-out': animation}">
+  <app-header></app-header>
+  <div class="page-wrapper">
+    <app-navbar></app-navbar>
+    <div class="page-body">
+      <div class="container-xl">
+        <router-outlet></router-outlet>
+        <app-footer></app-footer>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +10,15 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   animation: string = '';
+  loginForm: FormGroup;
+  message: string = '';
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService, private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
   toggleTheme() {
     const theme = document.body.getAttribute('data-bs-theme');
@@ -21,10 +29,17 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.animation = 'exit-slide-out';
-    setTimeout(() => {
-      this.router.navigate(['dashboard/home']);
-    }, 1000);
+    if(this.loginForm.valid) {
+      this.authService.login(this.loginForm.value).subscribe((res: any) => {
+        console.log(res);
+      });
+    }
+    
+    // animasi dibiarkan
+    // this.animation = 'exit-slide-out';
+    // setTimeout(() => {
+    //   this.router.navigate(['dashboard/home']);
+    // }, 1000);
   }
 
   ngOnInit() {

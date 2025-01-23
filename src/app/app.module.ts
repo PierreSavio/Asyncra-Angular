@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,7 +23,8 @@ import { PasMasukComponent } from './menu/pas-masuk/pas-masuk.component';
 import { LahanComponent } from './menu/lahan/lahan.component';
 import { BangunanComponent } from './menu/bangunan/bangunan.component';
 import { ListrikComponent } from './menu/listrik/listrik.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -46,10 +48,14 @@ import { ListrikComponent } from './menu/listrik/listrik.component';
     LahanComponent,
     BangunanComponent,
     ListrikComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

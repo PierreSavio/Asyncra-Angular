@@ -11,7 +11,7 @@ import { DokumenComponent } from './content/dokumen/dokumen.component';
 import { VerifvalidComponent } from './content/verifvalid/verifvalid.component';
 import { PermohonanComponent } from './content/permohonan/permohonan.component';
 import { MenuComponent } from './menu/menu.component';
-
+import { RegisterComponent } from './register/register.component';
 //Tambat
 import { SungaikakapComponent } from './menu/tambat/sungaikakap/sungaikakap.component';
 import { SungairengasComponent } from './menu/tambat/sungairengas/sungairengas.component';
@@ -46,7 +46,8 @@ const routes: Routes = [
   { path: 'header', component: HeaderComponent },
   { path: 'navbar', component: NavbarComponent },
   { path: 'footer', component: FooterComponent },
-  { path: '**', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 @NgModule({

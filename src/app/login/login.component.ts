@@ -32,6 +32,11 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe((res: any) => {
         console.log(res);
+        if(res.status === 'isLoggedIn') {
+          this.router.navigate(['dashboard/home']);
+        } else {
+          this.message = res.message;
+        }
       });
     }
     

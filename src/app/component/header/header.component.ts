@@ -1,7 +1,7 @@
 import { Component, Renderer2, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedHeaderService } from '../../shared.service';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,7 +10,9 @@ import { SharedHeaderService } from '../../shared.service';
 export class HeaderComponent implements OnInit {
   animation: string = '';
   isAnimationEnabled: boolean = true;
-  constructor(private router: Router, private renderer: Renderer2, private sharedHeaderService: SharedHeaderService) {}
+  owner: any = {};
+
+  constructor(private router: Router, private renderer: Renderer2, private sharedHeaderService: SharedHeaderService, private http: HttpClient) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('isAnimationEnabled') === 'true') {
@@ -18,6 +20,7 @@ export class HeaderComponent implements OnInit {
     } else {
       this.isAnimationEnabled = false;
     }
+    this.getUserData();
   }
 
   isActive(path: string): boolean {
@@ -53,5 +56,18 @@ export class HeaderComponent implements OnInit {
     setTimeout(() => {
       this.router.navigate(['/login']);
     }, 1000);
+  }
+
+  getUserData() {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    this.http.get('https://21e4-182-2-105-241.ngrok-free.app/user/api-v2.0/get-user', 
+      { headers })
+    .subscribe(({user}: any) => {
+      this.owner = {
+        email: user.email,
+        name: user.name,
+      };
+    });
   }
 }

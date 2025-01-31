@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -7,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
   animation: string = 'user1-component-render';
+  users: any = {};
+  loading: boolean = true;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('isAnimationEnabled') === 'true') {
@@ -16,5 +18,15 @@ export class UserComponent implements OnInit {
     } else {
       this.animation = '';
     }
+    this.getUsers();
+  }
+
+  getUsers() {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    this.http.get('https://21e4-182-2-105-241.ngrok-free.app/admin/api-v2.0/get-users', { headers }).subscribe((response: any) => {
+      this.users = response.users;
+      this.loading = false;
+    });
   }
 }

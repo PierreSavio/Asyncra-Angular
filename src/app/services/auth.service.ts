@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +13,13 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { 
     this.isLoggedIn = !!localStorage.getItem('token');
   }
-  private registerUrl = "http://dev.sipelikan.go.id/users/register";
-  private loginUrl = "http://dev.sipelikan.go.id/users/login";
-  
+
+  private registerUrl = "http://172.25.3.71:1200/users/register";
+  private loginUrl = "http://172.25.3.71:1200/users/login";
+
+  private ngrokURL_Login = "https://21e4-182-2-105-241.ngrok-free.app/api-v2.0/login-user";
+  private ngrokURL_Register = "https://21e4-182-2-105-241.ngrok-free.app/api-v2.0/register-user";
+
   login(data: any) {
     return this.http.post<any>(this.loginUrl, data).pipe(
       tap(response => {
@@ -30,6 +34,22 @@ export class AuthService {
           this.message = response.message;
           return response;
         }
+      })
+    );
+  }
+
+  loginWithNgrok(data: any) {
+    return this.http.post<any>(this.ngrokURL_Login, data).pipe(
+      tap(response => {
+        if(response) {
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('setToast', '1');
+          this.isLoggedIn = true;
+          return response;
+        }
+      }),
+      catchError(({error}) => {
+        return error.errors;
       })
     );
   }
@@ -61,5 +81,4 @@ export class AuthService {
       })
     );
   }
-
 }

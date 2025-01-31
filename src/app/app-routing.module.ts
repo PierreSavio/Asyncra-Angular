@@ -22,10 +22,11 @@ import { PasMasukComponent } from './menu/pas-masuk/pas-masuk.component';
 import { LahanComponent } from './menu/lahan/lahan.component';
 import { BangunanComponent } from './menu/bangunan/bangunan.component';
 import { ListrikComponent } from './menu/listrik/listrik.component';
+import { guardGuard } from './services/guard.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent, children: [
+  { path: 'dashboard', component: DashboardComponent, canActivate: [guardGuard], children: [
     { path: 'home', component: HomeComponent },
     { path: 'user', component: UserComponent },
     { path: 'dokumen', component: DokumenComponent },
@@ -43,9 +44,9 @@ const routes: Routes = [
     ]},
     { path: '**', redirectTo: 'home', pathMatch: 'full' },
   ] },
-  { path: 'header', component: HeaderComponent },
-  { path: 'navbar', component: NavbarComponent },
-  { path: 'footer', component: FooterComponent },
+  { path: 'header', component: HeaderComponent, canActivate: [guardGuard] },
+  { path: 'navbar', component: NavbarComponent, canActivate: [guardGuard] },
+  { path: 'footer', component: FooterComponent, canActivate: [guardGuard] },
   { path: 'register', component: RegisterComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];

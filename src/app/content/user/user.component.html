@@ -1,3 +1,9 @@
+<div class="py-2">
+  <div class="progress" [ngClass]="{'d-none': !loading}">
+    <div class="progress-bar progress-bar-indeterminate bg-green"></div>
+  </div>
+</div>
+
 <div class="card" style="border-radius: 25px;" [ngClass]="{'user1-component-render': animation}">
   <div class="card-header">
     <h3 class="card-title">Display</h3>
@@ -41,20 +47,21 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><span class="text-secondary">001401</span></td>
-          <td><a href="invoice.html" class="text-reset" tabindex="-1">anang123</a></td>
+        <tr *ngFor="let user of users; let i = index">
+          <td><span class="text-secondary">{{ i + 1 }}</span></td>
+          <td><a href="invoice.html" class="text-reset" tabindex="-1">NULL</a></td>
+          
           <td>
-            Anang
+            {{ user.name }}
           </td>
           <td>
-            anang&#64;gmail.com
+            {{ user.email }}
           </td>
           <td>
-            Admin
+            {{ user.role }}
           </td>
           <td>
-            081234567890
+            NULL
           </td>
           <td>
             <span class="badge bg-success me-1"></span> Active

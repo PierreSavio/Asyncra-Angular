@@ -10,7 +10,7 @@
       <div class="card-body">
         <h1 class="h1 text-center mb-4">Login Aplikasi</h1>
 
-        <form [formGroup]="loginForm" (ngSubmit)="loginWithNgrok()" autocomplete="off">
+        <form [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off">
           <div class="mb-3">
             <label class="form-label">Autentikasi Pengguna</label>
             <input type="text" class="form-control" placeholder="Email / Username / No.Telp / NIK" autocomplete="off" id="username" formControlName="email"> <!-- formControlName="username" -->

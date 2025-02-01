@@ -24,7 +24,7 @@ export class UserComponent implements OnInit {
   getUsers() {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    this.http.get('https://21e4-182-2-105-241.ngrok-free.app/admin/api-v2.0/get-users', { headers }).subscribe((response: any) => {
+    this.http.get('https://api.hkprox.xyz/admin/api-v2.0/get-users', { headers }).subscribe((response: any) => {
       this.users = response.users;
       this.loading = false;
     });

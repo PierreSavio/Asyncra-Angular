@@ -30,20 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if(this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe((res: any) => {
-        console.log(res);
-        if(res.resMsg === 'loginSuccess') {
-          this.router.navigate(['dashboard/home']);
-        } else {
-          this.message = res.message;
-        }
-      });
-    }
-  }
-
-  loginWithNgrok() {
-    this.authService.loginWithNgrok(this.loginForm.value).subscribe((res: any) => {
+    this.authService.login(this.loginForm.value).subscribe((res: any) => {
       if(res.status === true) {
         this.animation = 'exit-slide-out';
         this.sharedHeaderService.sendMessage(res.message);

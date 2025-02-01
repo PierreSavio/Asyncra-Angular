@@ -14,32 +14,11 @@ export class AuthService {
     this.isLoggedIn = !!localStorage.getItem('token');
   }
 
-  private registerUrl = "http://172.25.3.71:1200/users/register";
-  private loginUrl = "http://172.25.3.71:1200/users/login";
-
-  private ngrokURL_Login = "https://21e4-182-2-105-241.ngrok-free.app/api-v2.0/login-user";
-  private ngrokURL_Register = "https://21e4-182-2-105-241.ngrok-free.app/api-v2.0/register-user";
+  private registerUrl = "https://api.hkprox.xyz/users/register";
+  private loginUrl = "https://api.hkprox.xyz/api-v2.0/login-user";
 
   login(data: any) {
     return this.http.post<any>(this.loginUrl, data).pipe(
-      tap(response => {
-        if(response.status === 200){
-          localStorage.setItem('token', response.token);
-          this.isLoggedIn = true;
-          return response;
-        } else if(response.status === 401){
-          this.message = response.message;
-          return response;
-        } else {
-          this.message = response.message;
-          return response;
-        }
-      })
-    );
-  }
-
-  loginWithNgrok(data: any) {
-    return this.http.post<any>(this.ngrokURL_Login, data).pipe(
       tap(response => {
         if(response) {
           localStorage.setItem('token', response.token);

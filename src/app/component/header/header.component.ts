@@ -61,7 +61,7 @@ export class HeaderComponent implements OnInit {
   getUserData() {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    this.http.get('https://21e4-182-2-105-241.ngrok-free.app/user/api-v2.0/get-user', 
+    this.http.get('https://api.hkprox.xyz/user/api-v2.0/get-user', 
       { headers })
     .subscribe(({user}: any) => {
       this.owner = {

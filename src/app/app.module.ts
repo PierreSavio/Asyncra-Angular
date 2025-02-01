@@ -25,6 +25,7 @@ import { BangunanComponent } from './menu/bangunan/bangunan.component';
 import { ListrikComponent } from './menu/listrik/listrik.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
+import { ProfilesComponent } from './content/profiles/profiles.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { RegisterComponent } from './register/register.component';
     BangunanComponent,
     ListrikComponent,
     RegisterComponent,
+    ProfilesComponent,
   ],
   imports: [
     BrowserModule,

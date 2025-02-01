@@ -23,10 +23,12 @@ import { LahanComponent } from './menu/lahan/lahan.component';
 import { BangunanComponent } from './menu/bangunan/bangunan.component';
 import { ListrikComponent } from './menu/listrik/listrik.component';
 import { guardGuard } from './services/guard.guard';
+import { ProfilesComponent } from './content/profiles/profiles.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [guardGuard], children: [
+    { path: 'profiles', component: ProfilesComponent},
     { path: 'home', component: HomeComponent },
     { path: 'user', component: UserComponent },
     { path: 'dokumen', component: DokumenComponent },
